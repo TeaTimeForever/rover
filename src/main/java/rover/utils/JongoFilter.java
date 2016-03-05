@@ -1,15 +1,19 @@
 package rover.utils;
 
+import com.google.common.collect.Sets;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by eq on 05/03/16.
  */
 public class JongoFilter {
-    private Map<String, Object> filter;
+    private Map<String, Set<Object>> filter;
     private String query;
     private Object[] args;
 
@@ -31,7 +35,12 @@ public class JongoFilter {
 
     public JongoFilter addParam(String k, Object v, boolean nullable) {
         if (nullable || v != null ) {
-            filter.put(k, v);
+            Set<Object> val = filter.get(k);
+            if(val == null) {
+                val = new HashSet<>();
+                filter.put(k, val);
+            }
+            val.add(v);
         }
         return this;
     }
@@ -44,7 +53,7 @@ public class JongoFilter {
         StringBuilder query = new StringBuilder();
         List<Object> args = new ArrayList<>();
         filter.entrySet().forEach(e -> {
-            query.append(", " + e.getKey() + ": #");
+            query.append(", " + e.getKey() + ": {$in #}");
             args.add(e.getValue());
         });
         if(filter.size() > 0) {
