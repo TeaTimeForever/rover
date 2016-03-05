@@ -9,12 +9,12 @@ import java.math.BigDecimal;
  */
 public class Loan {
     private ObjectId id;
-    private Boolean approved;
-    private String countryRequestor;
+    private Boolean status;
+    private String requestedFrom;
     private BigDecimal amount;
     private String currency;
     private Long term;
-    private Long customerId;
+    private ObjectId customerId;
 
     public ObjectId getId() {
         return id;
@@ -24,20 +24,20 @@ public class Loan {
         this.id = id;
     }
 
-    public Boolean getApproved() {
-        return approved;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setApproved(Boolean approved) {
-        this.approved = approved;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public String getCountryRequestor() {
-        return countryRequestor;
+    public String getRequestedFrom() {
+        return requestedFrom;
     }
 
-    public void setCountryRequestor(String countryRequestor) {
-        this.countryRequestor = countryRequestor;
+    public void setRequestedFrom(String requestedFrom) {
+        this.requestedFrom = requestedFrom;
     }
 
     public BigDecimal getAmount() {
@@ -64,11 +64,11 @@ public class Loan {
         this.term = term;
     }
 
-    public Long getCustomerId() {
+    public ObjectId getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(ObjectId customerId) {
         this.customerId = customerId;
     }
 }
