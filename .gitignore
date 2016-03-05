@@ -81,6 +81,7 @@ fabric.properties
 ### Gradle ###
 .gradle
 build/
+.idea
 
 # Ignore Gradle GUI config
 gradle-app.setting
