@@ -26,7 +26,13 @@ public class JongoFilter {
     }
 
     public JongoFilter addParam(String k, Object v) {
-        filter.put(k, v);
+        return addParam(k, v, false);
+    }
+
+    public JongoFilter addParam(String k, Object v, boolean nullable) {
+        if (nullable || v != null ) {
+            filter.put(k, v);
+        }
         return this;
     }
 
