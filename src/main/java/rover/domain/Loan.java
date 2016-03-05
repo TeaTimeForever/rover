@@ -1,12 +1,14 @@
 package rover.domain;
 
+import org.bson.types.ObjectId;
+
 import java.math.BigDecimal;
 
 /**
  * Created by eq on 04/03/16.
  */
 public class Loan {
-    private Long id;
+    private ObjectId id;
     private Boolean approved;
     private String countryRequestor;
     private BigDecimal amount;
@@ -14,11 +16,11 @@ public class Loan {
     private Long term;
     private Long customerId;
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
