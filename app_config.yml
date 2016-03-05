@@ -1,0 +1,22 @@
+#server:
+#  applicationConnectors:
+#    - type: http
+#      port: 4080
+#logging:
+#  level: INFO
+#  loggers:
+#    lessi: DEBUG
+#  appenders:
+#    - type: console
+
+template: Hello, %s!
+defaultName: Stranger
+
+mongo:
+  seeds:
+  - host: 192.168.99.100:32768
+    port: 27017
+  database: rover
+#  credentials:
+#    userName: example
+#    password: example
