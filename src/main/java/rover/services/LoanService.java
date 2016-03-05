@@ -31,15 +31,9 @@ public class LoanService {
         return loanDao.find(id);
     }
 
-
-    public List<Loan> loadByCustomer(JongoFilter customerFilter){
-        JongoFilter loanFilter = JongoFilter.get();
-        System.out.println("\n");
+    public List<Loan> load(JongoFilter loanFilter, JongoFilter customerFilter){
         customerDao.load(customerFilter)
-                   .forEach(c -> {
-                       System.out.println(c.getName() + " " + c.getId() + " " + c.getPersonalId());
-                       loanFilter.addParam("customerId", c.getId());
-                   });
+                   .forEach(c -> loanFilter.addParam("customerId", c.getId()));
         loanFilter.buildQuery();
         return loanDao.load(loanFilter);
     }

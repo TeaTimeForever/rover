@@ -30,10 +30,17 @@ public class LoanResource {
 
     @GET
     @Timed
-    public List<Loan> getLoans(@QueryParam("personal_id") String personalId) {
-        JongoFilter filter = JongoFilter.get().addParam("personalId", personalId);
-        filter.buildQuery();
-        return loanService.loadByCustomer(filter);
+    public List<Loan> getLoans(
+            @QueryParam("personal_id") String personalId,
+            @QueryParam("status") Boolean status) {
+        JongoFilter customerFilter = JongoFilter.get()
+                .addParam("personalId", personalId)
+                .buildQuery();
+
+        JongoFilter loanFilter = JongoFilter.get()
+                .addParam("status", status, true)
+                .buildQuery();
+        return loanService.load(loanFilter, customerFilter);
     }
 
     @GET
