@@ -10,6 +10,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import rover.health.RoverHealthCheck;
+import rover.resources.LoanResource;
 import rover.resources.MainResource;
 
 /**
@@ -65,5 +66,6 @@ public class RoverApplication extends Application<RoverConfiguration>{
         environment.healthChecks().register("template", healthCheck);
 
         environment.jersey().register(MainResource.class);
+        environment.jersey().register(LoanResource.class);
     }
 }
