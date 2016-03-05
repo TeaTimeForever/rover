@@ -53,7 +53,7 @@ public class JongoFilter {
         StringBuilder query = new StringBuilder();
         List<Object> args = new ArrayList<>();
         filter.entrySet().forEach(e -> {
-            query.append(", " + e.getKey() + ": {$in #}");
+            query.append(", " + e.getKey() + ": {$in: #}");
             args.add(e.getValue());
         });
         if(filter.size() > 0) {

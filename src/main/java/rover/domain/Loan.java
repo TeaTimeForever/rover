@@ -1,6 +1,7 @@
 package rover.domain;
 
 import org.bson.types.ObjectId;
+import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import java.math.BigDecimal;
@@ -9,7 +10,11 @@ import java.math.BigDecimal;
  * Created by eq on 04/03/16.
  */
 public class Loan {
-    private ObjectId id;
+
+    @MongoId
+    @MongoObjectId
+    private String id;
+
     private Boolean status;
     private String requestedFrom;
     private BigDecimal amount;
@@ -19,11 +24,11 @@ public class Loan {
     @MongoObjectId
     private String customerId;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

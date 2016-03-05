@@ -3,12 +3,14 @@ package rover.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Length;
+import org.jongo.marshall.jackson.oid.MongoId;
 
 /**
  * Created by eq on 04/03/16.
  */
 public class Customer {
 
+    @MongoId
     private ObjectId id;
 
     @Length(max=64)
