@@ -1,6 +1,7 @@
 package rover.domain;
 
 import org.bson.types.ObjectId;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import java.math.BigDecimal;
 
@@ -14,7 +15,9 @@ public class Loan {
     private BigDecimal amount;
     private String currency;
     private Long term;
-    private ObjectId customerId;
+
+    @MongoObjectId
+    private String customerId;
 
     public ObjectId getId() {
         return id;
@@ -64,11 +67,11 @@ public class Loan {
         this.term = term;
     }
 
-    public ObjectId getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(ObjectId customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 }

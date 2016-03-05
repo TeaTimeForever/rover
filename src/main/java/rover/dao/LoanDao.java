@@ -5,6 +5,7 @@ import com.mongodb.DB;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import rover.utils.JongoFilter;
 import rover.domain.Loan;
 
 import javax.inject.Inject;
@@ -35,11 +36,10 @@ public class LoanDao {
                 .as(Loan.class);
     }
 
-    public List<Loan> load(){
-
+    public List<Loan> load(JongoFilter filter){
         return Lists.newArrayList((Iterator<? extends Loan>)
                 getCollection()
-                        .find()
+                        .find(filter.getQuery(), filter.getArgs())
                         .as(Loan.class));
     }
 
