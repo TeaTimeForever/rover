@@ -1,11 +1,17 @@
 package rover.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Length;
+
 /**
  * Created by eq on 04/03/16.
  */
 public class Customer {
     private Long id;
+
+    @Length(max=64)
     private String name;
+
     private String personalId;
 
     public Long getId() {
@@ -16,6 +22,8 @@ public class Customer {
         this.id = id;
     }
 
+
+    @JsonProperty
     public String getName() {
         return name;
     }
@@ -24,6 +32,7 @@ public class Customer {
         this.name = name;
     }
 
+    @JsonProperty
     public String getPersonalId() {
         return personalId;
     }
