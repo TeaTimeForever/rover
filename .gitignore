@@ -47,6 +47,9 @@ Temporary Items
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 
+lessi.iml
+lessi.ipr
+
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
