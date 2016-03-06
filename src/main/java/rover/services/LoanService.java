@@ -1,6 +1,7 @@
 package rover.services;
 
 import org.bson.types.ObjectId;
+import rover.dao.BlacklistDao;
 import rover.dao.CustomerDao;
 import rover.domain.Customer;
 import rover.utils.JongoFilter;
@@ -18,11 +19,13 @@ public class LoanService {
 
     private final LoanDao loanDao;
     private final CustomerDao customerDao;
+    private final BlacklistDao blacklistDao;
 
     @Inject
-    public LoanService(LoanDao loanDao, CustomerDao customerDao){
+    public LoanService(LoanDao loanDao, CustomerDao customerDao, BlacklistDao blackListDao){
         this.loanDao = loanDao;
         this.customerDao = customerDao;
+        this.blacklistDao = blackListDao;
     }
 
     public List<Loan> load(JongoFilter filter){
@@ -40,15 +43,24 @@ public class LoanService {
         return loanDao.load(loanFilter);
     }
 
-    public void processNewLoan(String personalId, String surname, String name, BigDecimal loanAmount, Long term) {
+    public Loan processNewLoan(String personalId, String surname, String name, BigDecimal loanAmount, Long term) {
+        if(blacklistDao.isPersonBlacklisted(personalId)) return null;
+
+        JongoFilter customerFilter = JongoFilter.get()
+                                                .addParam(Customer.PERSONAL_ID, personalId)
+                                                .buildQuery();
+
+        Customer customer = new Customer();
+        customer.setName(name, surname);
+        customer.setPersonalId(personalId);
+        customer = customerDao.upsert(customerFilter, customer);
+
         Loan loan = new Loan();
         loan.setAmount(loanAmount);
         loan.setTerm(term);
-        loan.setCurrency("LV");
+        loan.setCurrency("EUR");
+        loan.setCustomerId(customer.getId());
 
-        JongoFilter customerFilter = JongoFilter.get()
-                .addParam(Loan.CUSTOMER_ID, personalId);
-        Customer customer = customerDao.load(customerFilter).get(0);
-
+        return loanDao.insert(loan);
     }
 }

@@ -2,6 +2,7 @@ package rover.dao;
 
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
+import com.mongodb.WriteResult;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -43,5 +44,9 @@ public class LoanDao {
                         .as(Loan.class));
     }
 
+    public Loan insert(Loan loan){
+        getCollection().insert(loan);
+        return loan;
+    }
 
 }
