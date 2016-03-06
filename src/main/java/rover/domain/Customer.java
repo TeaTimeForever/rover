@@ -10,6 +10,10 @@ import org.jongo.marshall.jackson.oid.MongoId;
  */
 public class Customer {
 
+    public static final String ID = "_id";
+    public static final String NAME = "name";
+    public static final String PERSONAL_ID= "personalId";
+
     @MongoId
     private ObjectId id;
 
