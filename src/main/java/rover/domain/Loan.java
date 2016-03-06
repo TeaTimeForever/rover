@@ -1,6 +1,5 @@
 package rover.domain;
 
-import org.bson.types.ObjectId;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
@@ -10,6 +9,12 @@ import java.math.BigDecimal;
  * Created by eq on 04/03/16.
  */
 public class Loan {
+
+    private static final String ID = "_id";
+    private static final String STATUS = "status";
+    private static final String AMOUNT = "amount";
+    private static final String CURRENCY = "currency";
+    private static final String REQUESTED_FROM= "requestedFrom";
 
     @MongoId
     @MongoObjectId
