@@ -44,8 +44,6 @@ public class LoanService {
     }
 
     public Loan processNewLoan(String personalId, String surname, String name, BigDecimal loanAmount, Long term) {
-        if(blacklistDao.isPersonBlacklisted(personalId)) return null;
-
         JongoFilter customerFilter = JongoFilter.get()
                                                 .addParam(Customer.PERSONAL_ID, personalId)
                                                 .buildQuery();
@@ -60,6 +58,10 @@ public class LoanService {
         loan.setTerm(term);
         loan.setCurrency("EUR");
         loan.setCustomerId(customer.getId());
+
+        if(blacklistDao.isPersonBlacklisted(personalId)) {
+            loan.setStatus(false);
+        }
 
         return loanDao.insert(loan);
     }
