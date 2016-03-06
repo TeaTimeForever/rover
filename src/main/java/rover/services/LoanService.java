@@ -2,11 +2,13 @@ package rover.services;
 
 import org.bson.types.ObjectId;
 import rover.dao.CustomerDao;
+import rover.domain.Customer;
 import rover.utils.JongoFilter;
 import rover.dao.LoanDao;
 import rover.domain.Loan;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -36,5 +38,17 @@ public class LoanService {
                    .forEach(c -> loanFilter.addParam("customerId", c.getId()));
         loanFilter.buildQuery();
         return loanDao.load(loanFilter);
+    }
+
+    public void processNewLoan(String personalId, String surname, String name, BigDecimal loanAmount, Long term) {
+        Loan loan = new Loan();
+        loan.setAmount(loanAmount);
+        loan.setTerm(term);
+        loan.setCurrency("LV");
+
+        JongoFilter customerFilter = JongoFilter.get()
+                .addParam("personalId", personalId);
+        Customer customer = customerDao.load(customerFilter).get(0);
+
     }
 }
