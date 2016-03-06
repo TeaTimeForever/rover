@@ -32,6 +32,7 @@ public class RoverApplication extends Application<RoverConfiguration>{
 
     @Override
     public void initialize(Bootstrap<RoverConfiguration> bootstrap) {
+        System.setProperty("java.net.preferIPv4Stack" , "true");
         bootstrap.addBundle(mongoBundle = MongoBundle.<RoverConfiguration>builder()
                 .withConfiguration(RoverConfiguration::getMongo)
                         .build());
