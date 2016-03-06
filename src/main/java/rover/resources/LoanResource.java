@@ -2,6 +2,7 @@ package rover.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import org.bson.types.ObjectId;
+import rover.dto.NewLoanRequestDTO;
 import rover.utils.JongoFilter;
 import rover.domain.Loan;
 import rover.services.LoanService;
@@ -46,8 +47,14 @@ public class LoanResource {
     @POST
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
-    public String saveLoan(){
-        return "Yooooo";
+    public NewLoanRequestDTO saveLoan(NewLoanRequestDTO newLoan){
+        loanService.processNewLoan(
+                newLoan.getPersonalId(),
+                newLoan.getSurname(),
+                newLoan.getName(),
+                newLoan.getLoanAmount(),
+                newLoan.getTerm());
+        return newLoan;
     }
 
     @GET
