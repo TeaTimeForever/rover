@@ -37,8 +37,10 @@ public class LoanService {
     }
 
     public List<Loan> load(JongoFilter loanFilter, JongoFilter customerFilter){
-        customerDao.load(customerFilter)
-                   .forEach(c -> loanFilter.addParam(Loan.CUSTOMER_ID, new ObjectId(c.getId())));
+        if(!customerFilter.isEmpty()){
+            customerDao.load(customerFilter)
+                    .forEach(c -> loanFilter.addParam(Loan.CUSTOMER_ID, new ObjectId(c.getId())));
+        }
         loanFilter.buildQuery();
         return loanDao.load(loanFilter);
     }

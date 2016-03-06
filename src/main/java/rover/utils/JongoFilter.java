@@ -67,4 +67,8 @@ public class JongoFilter {
         this.args = args.toArray();
         return this;
     }
+
+    public boolean isEmpty() {
+        return filter.isEmpty();
+    }
 }
