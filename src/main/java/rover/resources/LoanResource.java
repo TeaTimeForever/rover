@@ -9,6 +9,7 @@ import rover.services.LoanService;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -18,7 +19,6 @@ import java.util.List;
 
 @Path("/loans")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class LoanResource {
 
     private final LoanService loanService;
@@ -38,9 +38,16 @@ public class LoanResource {
                 .buildQuery();
 
         JongoFilter loanFilter = JongoFilter.get()
-                .addParam("status", status, true)
+                .addParam("status", status)
                 .buildQuery();
         return loanService.load(loanFilter, customerFilter);
+    }
+
+    @POST
+    @Timed
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String saveLoan(){
+        return "Yooooo";
     }
 
     @GET
