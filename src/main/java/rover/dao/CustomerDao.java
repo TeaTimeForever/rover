@@ -46,18 +46,19 @@ public class CustomerDao {
                         .as(Customer.class));
     }
 
-    public Optional<Customer> findOne(JongoFilter customerFilter) {
-        return Optional.ofNullable(getCollection()
+    public Customer findOne(JongoFilter customerFilter) {
+        return getCollection()
                 .findOne(customerFilter.getQuery(), customerFilter.getArgs())
-                .as(Customer.class)
-        );
+                .as(Customer.class);
     }
 
+    //TODO: thats a shame, but its 4:30am
     public Customer upsert(JongoFilter filter, Customer customer) {
         getCollection()
                 .update(filter.getQuery(), filter.getArgs())
                 .upsert()
                 .with(customer);
-        return customer;
+
+        return findOne(filter);
     }
 }
