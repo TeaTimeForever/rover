@@ -17,6 +17,7 @@ Icon
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
+*.mmdb
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
