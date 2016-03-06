@@ -39,8 +39,7 @@ public class LoanResource {
     @Timed
     public List<Loan> getLoans(
             @QueryParam("personal_id") String personalId,
-            @QueryParam("status") Boolean status,
-            @Context HttpServletRequest req
+            @QueryParam("status") Boolean status
     ) {
         JongoFilter customerFilter = JongoFilter.get()
                 .addParam(Customer.PERSONAL_ID, personalId)
@@ -50,25 +49,22 @@ public class LoanResource {
                 .addParam(Loan.STATUS, status)
                 .buildQuery();
 
-        System.out.println("ip: " + req.getRemoteAddr());
-        System.out.println("ip: " + req.getRemoteHost());
-
-        System.out.println(geoService.getCountryByIp("212.93.105.137"));
-        System.out.println(geoService.getCountryByIp(req.getRemoteAddr()));
-
         return loanService.load(loanFilter, customerFilter);
     }
 
     @POST
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
-    public NewLoanRequestDTO saveLoan(NewLoanRequestDTO newLoan){
+    public NewLoanRequestDTO saveLoan(
+            NewLoanRequestDTO newLoan,
+            @Context HttpServletRequest req){
         loanService.processNewLoan(
                 newLoan.getPersonalId(),
                 newLoan.getSurname(),
                 newLoan.getName(),
                 newLoan.getLoanAmount(),
-                newLoan.getTerm());
+                newLoan.getTerm(),
+                geoService.getCountryByIp(req.getRemoteAddr()));
         return newLoan;
     }
 
