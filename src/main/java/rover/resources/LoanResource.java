@@ -2,6 +2,7 @@ package rover.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import org.bson.types.ObjectId;
+import rover.domain.Customer;
 import rover.dto.NewLoanRequestDTO;
 import rover.utils.JongoFilter;
 import rover.domain.Loan;
@@ -35,11 +36,11 @@ public class LoanResource {
             @QueryParam("personal_id") String personalId,
             @QueryParam("status") Boolean status) {
         JongoFilter customerFilter = JongoFilter.get()
-                .addParam("personalId", personalId)
+                .addParam(Customer.PERSONAL_ID, personalId)
                 .buildQuery();
 
         JongoFilter loanFilter = JongoFilter.get()
-                .addParam("status", status)
+                .addParam(Loan.STATUS, status)
                 .buildQuery();
         return loanService.load(loanFilter, customerFilter);
     }

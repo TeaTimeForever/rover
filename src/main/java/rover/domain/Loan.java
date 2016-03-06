@@ -10,11 +10,12 @@ import java.math.BigDecimal;
  */
 public class Loan {
 
-    private static final String ID = "_id";
-    private static final String STATUS = "status";
-    private static final String AMOUNT = "amount";
-    private static final String CURRENCY = "currency";
-    private static final String REQUESTED_FROM= "requestedFrom";
+    public static final String ID = "_id";
+    public static final String STATUS = "status";
+    public static final String AMOUNT = "amount";
+    public static final String CURRENCY = "currency";
+    public static final String REQUESTED_FROM= "requestedFrom";
+    public static final String CUSTOMER_ID= "customerId";
 
     @MongoId
     @MongoObjectId
