@@ -2,18 +2,15 @@ package rover.dao;
 
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
-import com.mongodb.WriteResult;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import rover.domain.Customer;
-import rover.domain.Loan;
 import rover.utils.JongoFilter;
 
 import javax.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by eq on 05/03/16.

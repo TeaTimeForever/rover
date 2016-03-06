@@ -42,6 +42,7 @@ public class LoanResource {
         JongoFilter loanFilter = JongoFilter.get()
                 .addParam(Loan.STATUS, status)
                 .buildQuery();
+
         return loanService.load(loanFilter, customerFilter);
     }
 
