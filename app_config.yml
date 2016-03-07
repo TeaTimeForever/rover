@@ -14,7 +14,7 @@ defaultName: Stranger
 
 mongo:
   seeds:
-  - host: 192.168.99.100:32768
+  - host: 192.168.99.100:32770
     port: 27017
   database: rover
 #  credentials:
