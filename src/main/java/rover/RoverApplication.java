@@ -1,9 +1,5 @@
 package rover;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.name.Named;
-import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.meltmedia.dropwizard.mongo.MongoBundle;
@@ -15,10 +11,6 @@ import rover.health.RoverHealthCheck;
 import rover.resources.LoanResource;
 import rover.resources.MainResource;
 import rover.utils.CountryFrequencyFilter;
-
-import javax.ws.rs.container.DynamicFeature;
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.FeatureContext;
 
 /**
  * Created by eq on 05/03/16.
