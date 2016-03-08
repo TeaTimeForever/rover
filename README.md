@@ -35,33 +35,17 @@ Content-Type: application/json
 - REST
 - jukito [mockito + guice + junit]
 - writing tests seriously
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
+
+
+
+
+
+
+
+
+
+
+
 
 ![No pressure](http://www.reactiongifs.com/r/pmw.gif)
 
