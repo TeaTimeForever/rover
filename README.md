@@ -24,7 +24,7 @@ Content-Type: application/json
  "personalId": "111"
 }
 ```
-#### No pressure
+
 ![my saturday](http://www.theredheadriter.com/wp-content/uploads/2015/01/your-plan-vs-reality-photo-755x532.png)
 
 #### Never Have I Ever [drinking game]
@@ -35,3 +35,13 @@ Content-Type: application/json
 - REST
 - jukito [mockito + guice + junit]
 - writing tests seriously
+-
+-
+-
+-
+-
+-
+
+![No pressure](http://www.reactiongifs.com/r/pmw.gif)
+
+
