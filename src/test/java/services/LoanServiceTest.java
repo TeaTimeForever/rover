@@ -7,13 +7,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import testHelpers.MongoTestModule;
+import testHelpers.TestModule;
 
 /**
  * Created by eq on 08/03/16.
  */
 @RunWith(JukitoRunner.class)
-@UseModules(MongoTestModule.class)
+@UseModules(TestModule.class)
 public class LoanServiceTest extends Assert {
     private final String LOANS = "loans";
     private final String CUSTOMERS = "customers";
