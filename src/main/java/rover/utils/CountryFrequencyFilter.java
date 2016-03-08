@@ -50,7 +50,7 @@ public class CountryFrequencyFilter implements Filter{
             dictionary.put(iso, new Date());
 
             if(lastPOST != null &&
-                lastPOST.getTime() - dictionary.get(iso).getTime() < COUNTED_PERIOD) {
+                    dictionary.get(iso).getTime() - lastPOST.getTime() < COUNTED_PERIOD) {
                 HttpServletResponse res = (HttpServletResponse) servletResponse;
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.setContentType("application/json");
