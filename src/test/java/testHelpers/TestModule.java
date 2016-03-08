@@ -13,11 +13,15 @@ import org.jongo.Jongo;
 public class TestModule extends AbstractModule {
     @Provides
     @Singleton
-    public Jongo getDB(RoverTestConfiguration config){
+    public DB getDB(RoverTestConfiguration config){
         MongoClient client = new MongoClient(config.getMongoHost(), config.getMongoPort());
-        DB db = client.getDB(config.getDatabaseName());
-        return new Jongo(db);
+        return client.getDB(config.getDatabaseName());
+    }
 
+    @Provides
+    @Singleton
+    public Jongo getJongo(DB db){
+        return new Jongo(db);
     }
 
     @Provides

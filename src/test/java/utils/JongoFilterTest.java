@@ -68,8 +68,5 @@ public class JongoFilterTest extends Assert {
 
         assertEquals("{ aaa: {$in: #}, bbb: {$in: #}}", f.getQuery());
         assertArrayEquals(args, f.getArgs());
-
     }
-
-
 }
