@@ -22,13 +22,14 @@ import java.util.Map;
  * Created by eq on 06/03/16.
  */
 @Singleton
-public class CountryFrequencyFilter implements Filter{
-    private final long COUNTED_PERIOD = 5000;
+public class CountryFrequencyFilter implements Filter {
+    private final long PERIOD = 5000;
+    private final int CAPACITY = 2; //WARNING: should be greater than 1 !
 
     private final GeoService geoService;
     private final String ERROR_JSON = "{\"error\": \"YOU SHALL NOT PASS [try later]\"}";
 
-    private Map<String, Date> dictionary;
+    private Map<String, RequestsQueue> dictionary;
 
     @Inject
     public CountryFrequencyFilter(GeoService geoService){
@@ -46,11 +47,14 @@ public class CountryFrequencyFilter implements Filter{
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         if(req.getMethod().equalsIgnoreCase("POST")) {
             String iso = geoService.getCountryByIp(req.getRemoteAddr());
-            Date lastPOST = dictionary.get(iso);
-            dictionary.put(iso, new Date());
+            RequestsQueue queue = dictionary.get(iso);
+            if(queue == null) {
+                queue = new RequestsQueue(CAPACITY, PERIOD);
+                dictionary.put(iso, queue);
+            }
+            boolean isNextReqAllowed = queue.push(new Date());
 
-            if(lastPOST != null &&
-                    dictionary.get(iso).getTime() - lastPOST.getTime() < COUNTED_PERIOD) {
+            if(!isNextReqAllowed){
                 HttpServletResponse res = (HttpServletResponse) servletResponse;
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.setContentType("application/json");

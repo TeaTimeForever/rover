@@ -1,5 +1,6 @@
 package resources;
 
+import com.maxmind.geoip2.record.Country;
 import org.jukito.JukitoRunner;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,42 +18,42 @@ import java.lang.reflect.Field;
 @RunWith(JukitoRunner.class)
 public class CapacityTest extends Assert {
 
-    private final int capacity = 4;
+    private final int capacity = 4,
+                      period= 5000;
 
     @Test
     public void cyclicality(GeoService gs) throws IOException, ServletException {
-        RequestsQueue r = new RequestsQueue(capacity);
+        RequestsQueue r = new RequestsQueue(capacity, period);
         try {
             Field head = RequestsQueue.class.getDeclaredField("head");
             Field last = RequestsQueue.class.getDeclaredField("last");
             head.setAccessible(true);
             last.setAccessible(true);
             // 0 elem
-            assertEquals(0, head.get(r));
+            assertEquals(-1, head.get(r));
             assertEquals(0, last.get(r));
 
             r.push(null);
             //1 elem
-            assertEquals(1, head.get(r));
+            assertEquals(0, head.get(r));
             assertEquals(0, last.get(r));
 
-            r.push(null)
-             .push(null)
-             .push(null);
+            r.push(null);
+            r.push(null);
+            r.push(null);
 
             // full
-            assertEquals(0, head.get(r));
-            assertEquals(1, last.get(r));
+            assertEquals(3, head.get(r));
+            assertEquals(0, last.get(r));
 
             r.push(null);
-            assertEquals(1, head.get(r));
-            assertEquals(2, last.get(r));
+            assertEquals(0, head.get(r));
+            assertEquals(1, last.get(r));
 
 
         } catch (Exception e ){
             e.printStackTrace();
             Assert.fail("Failed during exception");
-
         }
     }
 }

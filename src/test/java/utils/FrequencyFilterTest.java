@@ -49,6 +49,7 @@ public class FrequencyFilterTest extends Assert {
         Mockito.when(req.getRemoteAddr()).thenReturn("83.99.135.214");
         filter.doFilter(req, res, chain);
         filter.doFilter(req, res, chain);
+        filter.doFilter(req, res, chain);
         assertEquals(ERROR_JSON, sw.getBuffer().toString());
     }
 
