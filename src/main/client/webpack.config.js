@@ -5,7 +5,7 @@ var config = {
     resolve: {root: path.resolve(__dirname, 'src')},
     entry: path.resolve(__dirname, 'src/main.jsx'),
     output: {
-        path: path.resolve(__dirname, '../resources'),
+        path: path.resolve(__dirname, '../resources/assets'),
         filename: 'bundle.js'
     },
     module: {

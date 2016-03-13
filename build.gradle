@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     compile 'io.dropwizard:dropwizard-core:0.9.2'
+    compile 'io.dropwizard:dropwizard-assets:0.9.2'
+
     compile 'com.meltmedia.dropwizard:dropwizard-mongo:0.2.0'
     compile 'com.hubspot.dropwizard:dropwizard-guice:0.8.4.0'
     compile 'org.jongo:jongo:1.2'

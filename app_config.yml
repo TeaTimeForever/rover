@@ -9,6 +9,14 @@
 #  appenders:
 #    - type: console
 
+server:
+  type: simple
+  applicationContextPath: /
+  rootPath: /api/
+  connector:
+    type: http
+    port: 8080
+
 template: Hello, %s!
 defaultName: Stranger
 

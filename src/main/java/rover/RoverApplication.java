@@ -5,7 +5,7 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.meltmedia.dropwizard.mongo.MongoBundle;
 import com.mongodb.DB;
 import io.dropwizard.Application;
-import io.dropwizard.jersey.gzip.GZipDecoder;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import rover.health.RoverHealthCheck;
@@ -15,12 +15,10 @@ import rover.utils.CountryFrequencyFilter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * Created by eq on 05/03/16.
@@ -51,6 +49,7 @@ public class RoverApplication extends Application<RoverConfiguration>{
     public void initialize(Bootstrap<RoverConfiguration> bootstrap) {
         System.setProperty("java.net.preferIPv4Stack" , "true");
 
+        bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
         bootstrap.addBundle(mongoBundle = MongoBundle.<RoverConfiguration>builder()
                 .withConfiguration(RoverConfiguration::getMongo)
                         .build());
@@ -69,6 +68,7 @@ public class RoverApplication extends Application<RoverConfiguration>{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
