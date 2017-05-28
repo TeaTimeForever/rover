@@ -32,9 +32,7 @@ Content-Type: application/json
 - mongo [just a little bit, only for expirience]
 - jongo
 - guice
-- REST
 - jukito [mockito + guice + junit]
-- writing tests seriously
 
 
 
